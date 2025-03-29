@@ -7,10 +7,10 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface IUsuarioService {
-    public List<Usuario> findAll();
-    public Usuario findById(long id);
-    public Usuario update(Usuario usuario);
-    public Usuario save(Usuario usuario);
-    public void delete(Usuario usuario);
-    public Page<Usuario> findAll(Pageable pageable);
+    List<Usuario> findAll();
+    Usuario findById(long id);
+    Usuario update(Usuario usuario);
+    Usuario save(Usuario usuario);
+    void delete(Usuario usuario);
+    Page<Usuario> findAll(Pageable pageable);
 }

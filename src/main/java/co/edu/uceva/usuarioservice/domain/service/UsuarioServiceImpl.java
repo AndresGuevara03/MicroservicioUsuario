@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
 
-    private IUsuarioRepository repository;
+    IUsuarioRepository repository;
 
     public UsuarioServiceImpl(IUsuarioRepository repository) {
         this.repository = repository;
