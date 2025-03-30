@@ -2,6 +2,9 @@ package co.edu.uceva.usuarioservice.delibery.rest;
 
 import co.edu.uceva.usuarioservice.domain.model.Usuario;
 import co.edu.uceva.usuarioservice.domain.service.IUsuarioService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -17,6 +20,12 @@ public class UsuarioRestController {
     @GetMapping("/usuarios")
     public List<Usuario> getUsuarios() {
         return usuarioService.findAll();
+    }
+
+    @GetMapping("/usuarios/page/{page}")
+    public Page<Usuario> index(@PathVariable Integer page) {
+        Pageable pageable = PageRequest.of(page, 4);
+        return usuarioService.findAll(pageable);
     }
 
     @PostMapping("/usuarios")
