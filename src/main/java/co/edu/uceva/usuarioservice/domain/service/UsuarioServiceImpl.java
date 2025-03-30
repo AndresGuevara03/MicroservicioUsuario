@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
@@ -26,8 +27,8 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     @Transactional
-    public Usuario findById(long id) {
-        return repository.findById(id).orElse(null);
+    public Optional<Usuario> findById(long id) {
+        return repository.findById(id);
     }
 
     @Override
