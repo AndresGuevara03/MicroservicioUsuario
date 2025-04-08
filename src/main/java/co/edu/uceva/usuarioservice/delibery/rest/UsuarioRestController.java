@@ -56,11 +56,11 @@ public class UsuarioRestController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException(bindingResult);
         }
-        Usuario nuevoUsuario = usuarioService.findById(usuario.getId()).orElse(null);
-        if(nuevoUsuario != null) {
-            throw new UsuarioExistenteException(nuevoUsuario.getId());
+        if(usuario.getId() != null &&
+                usuarioService.findById(usuario.getId()).orElse(null) != null) {
+            throw new UsuarioExistenteException(usuario.getId());
         }
-        nuevoUsuario = usuarioService.save(usuario);
+        Usuario nuevoUsuario = usuarioService.save(usuario);
         response.put(MENSAJE, "El usuario ha sido creado con éxito!");
         response.put(USUARIO, nuevoUsuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
