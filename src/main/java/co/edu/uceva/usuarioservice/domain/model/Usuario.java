@@ -1,6 +1,5 @@
 package co.edu.uceva.usuarioservice.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -12,7 +11,7 @@ import lombok.Setter;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotEmpty(message = "No puede estar vacio")
     @Size(min = 2, max = 30)
     @Column(nullable = false)
@@ -33,10 +32,10 @@ public class Usuario {
     @Min(value = 0, message = "No puede ser negativo")
     @NotNull(message = "Su cedula no puede quedar sin un valor.")
     @Column(nullable = false)
-    private long cedula;
+    private Long cedula;
     @NotNull(message = "Su numero de telefono no puede quedar sin un valor.")
     @Column(nullable = false)
-    private long telefono;
+    private Long telefono;
     @NotEmpty(message = "No puede estar vacio")
     @Pattern(
             regexp = "^(Estudiante|Docente|Administrativo|Decano|Rector|Administrador)$",
