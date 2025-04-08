@@ -1,9 +1,6 @@
 package co.edu.uceva.usuarioservice.delibery.rest;
 
-import co.edu.uceva.usuarioservice.domain.exception.NoHayUsuariosException;
-import co.edu.uceva.usuarioservice.domain.exception.PaginaSinUsuariosException;
-import co.edu.uceva.usuarioservice.domain.exception.UsuarioNoEncontradoException;
-import co.edu.uceva.usuarioservice.domain.exception.ValidationException;
+import co.edu.uceva.usuarioservice.domain.exception.*;
 import co.edu.uceva.usuarioservice.domain.model.Usuario;
 import co.edu.uceva.usuarioservice.domain.service.IUsuarioService;
 import jakarta.validation.Valid;
@@ -43,7 +40,7 @@ public class UsuarioRestController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/usuarios/page/{page}")
+    @GetMapping("/usuario/page/{page}")
     public ResponseEntity<Object> index(@PathVariable Integer page) {
         Pageable pageable = PageRequest.of(page, 4);
         Page<Usuario> usuarios = usuarioService.findAll(pageable);
@@ -59,7 +56,11 @@ public class UsuarioRestController {
         if (bindingResult.hasErrors()) {
             throw new ValidationException(bindingResult);
         }
-        Usuario nuevoUsuario = usuarioService.save(usuario);
+        Usuario nuevoUsuario = usuarioService.findById(usuario.getId()).orElse(null);
+        if(nuevoUsuario != null) {
+            throw new UsuarioExistenteException(nuevoUsuario.getId());
+        }
+        nuevoUsuario = usuarioService.save(usuario);
         response.put(MENSAJE, "El usuario ha sido creado con éxito!");
         response.put(USUARIO, nuevoUsuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
