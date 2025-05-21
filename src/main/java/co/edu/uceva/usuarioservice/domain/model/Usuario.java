@@ -38,8 +38,8 @@ public class Usuario {
     private Long telefono;
     @NotEmpty(message = "No puede estar vacio")
     @Pattern(
-            regexp = "^(Estudiante|Docente|Administrativo|Decano|Rector|Administrador)$",
-            message = "El rol debe ser uno de los siguientes: Estudiante, Docente, Administrativo, Decano, Rector o Administrador"
+            regexp = "^(Estudiante|Coordinador|Docente|Administrativo|Decano|Rector|Administrador)$",
+            message = "El rol debe ser uno de los siguientes: Estudiante, Docente, Coordinador, Administrativo, Decano, Rector o Administrador"
     )
     private String rol;
 }
