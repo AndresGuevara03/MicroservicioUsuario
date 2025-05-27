@@ -48,14 +48,3 @@ spring:
         show-sql: true
     main:
         allow-circular-references: true
-
-eureka:
-    client:
-        service-url:
-            defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
-        register-with-eureka: true
-        fetch-registry: true
-        lease-renewal-interval-in-seconds: 5   # Heartbeat cada 30 segundos (valor recomendado)
-        lease-expiration-duration-in-seconds: 90 # Tiempo para considerar DOWN si no recibe heartbeats
-        renewal-percent-threshold: 0.85  # Default es 0.85, puedes bajarlo un poco, por ejemplo 0.75
-        enable-self-preservation: true   # Esto ya viene en true, pero confírmalo
